@@ -74,6 +74,14 @@ class XFlagman:
             raise RuntimeError('Cannot find enough flags for file at path: \n{}'.format(path))
         flags = flags[1:-4]
 
+        # Some flags are unwanted
+        unwanted = [
+                '-ivfsoverlay'
+                ]
+        for u in unwanted:
+            while u in flags:
+                flags.remove(u)
+
         return flags
 
     def derivedDir(self):
